@@ -38,18 +38,6 @@ nkf:
 	cd nkf; wget https://ja.osdn.net/dl/nkf/nkf-2.1.4.tar.gz
 	cd nkf; tar zxvf nkf-2.1.4.tar.gz; cd nkf-2.1.4; $(MAKE) prefix=.
 
-warp-ctc: virtualenv
-	git clone https://github.com/jnishi/warp-ctc.git
-	. venv/bin/activate; cd warp-ctc && mkdir build && cd build && cmake .. && make -j4 ; true
-	. venv/bin/activate; pip install cffi
-	. venv/bin/activate; cd warp-ctc/pytorch_binding && python setup.py install # maybe need to: apt-get install python-dev
-
-chainer_ctc: virtualenv
-	git clone https://github.com/jheymann85/chainer_ctc.git
-	. venv/bin/activate; pip install cython
-	. venv/bin/activate; cd chainer_ctc && chmod +x install_warp-ctc.sh && ./install_warp-ctc.sh ; true
-	. venv/bin/activate; cd chainer_ctc && pip install .
-
 sentencepiece:
 	git clone https://github.com/google/sentencepiece.git
 	cd sentencepiece && mkdir build && cd build && (cmake3 .. || cmake ..) && $(MAKE)
